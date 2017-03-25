@@ -114,14 +114,6 @@ public class HomeTabActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-
-            return fragment;
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -155,7 +147,19 @@ public class HomeTabActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            Fragment fragment = new Fragment();
+            if (position == 0){
+                fragment = new HeadlinesFragment();
+
+            }else if (position == 1){
+                fragment = new TrendingFragment();
+
+            }else if (position == 2){
+                fragment = new BookmarkFragment();
+
+            }
+
+            return fragment;
         }
 
         @Override

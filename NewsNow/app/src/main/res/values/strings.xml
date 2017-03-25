@@ -6,4 +6,8 @@
     <string name="HEADLINES">HEADLINES</string>
     <string name="TRENDING">TRENDING</string>
     <string name="BOOKMARK">BOOKMARK</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_news_detail">NewsDetail</string>
 </resources>
