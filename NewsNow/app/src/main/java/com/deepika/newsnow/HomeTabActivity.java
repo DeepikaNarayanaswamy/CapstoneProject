@@ -119,15 +119,23 @@ public class HomeTabActivity extends AppCompatActivity {
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
+
             return fragment;
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home_tab, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            int sectionNo = getArguments().getInt(ARG_SECTION_NUMBER);
+            View rootView = null;
+            if (sectionNo == 1)
+                rootView = inflater.inflate(R.layout.fragment_home_tab, container, false);
+            else if (sectionNo == 2)
+                rootView = inflater.inflate(R.layout.fragment_trending_tab, container, false);
+            else if (sectionNo == 3)
+                rootView = inflater.inflate(R.layout.fragment_bookmark_tab, container, false);
+            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
             return rootView;
         }
     }
