@@ -78,7 +78,7 @@ public class HomeTabActivity extends AppCompatActivity {
             }
         });
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        Log.v("news category",pref.getString("news_category_list",null));
+
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 

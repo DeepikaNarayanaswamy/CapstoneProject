@@ -1,5 +1,7 @@
 package com.deepika.newsnow.pojo;
 
+import java.util.Date;
+
 /**
  * Created by user on 3/25/2017.
  */
@@ -70,5 +72,7 @@ public class News {
     private String newsCategory;
     private String newsURL;
     private boolean isBookmarked;
+    private boolean isDeleted;
+    private Date datePublished;
 
 }
