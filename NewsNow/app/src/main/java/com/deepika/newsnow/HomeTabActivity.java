@@ -29,7 +29,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import com.deepika.newsnow.sync.GenericAccountService;
+
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class HomeTabActivity extends AppCompatActivity {
@@ -93,19 +93,7 @@ public class HomeTabActivity extends AppCompatActivity {
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-   /* // Global variables
-        // A content resolver for accessing the provider
-        ContentResolver mResolver;
-            // Get the content resolver for your app
-            mResolver = getContentResolver();
-        *//*
-         * Turn on periodic syncing
-         *//*
-            ContentResolver.addPeriodicSync(
-                    GenericAccountService.GetAccount(ACCOUNT),
-                    AUTHORITY,
-                    Bundle.EMPTY,
-                    SYNC_INTERVAL);*/
+
 
         }
 

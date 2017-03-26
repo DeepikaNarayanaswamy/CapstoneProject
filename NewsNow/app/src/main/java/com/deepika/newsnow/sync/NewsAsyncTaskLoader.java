@@ -27,7 +27,7 @@ import java.util.List;
  */
 
 public class NewsAsyncTaskLoader extends AsyncTaskLoader<List<News>>{
-    public static final String TAG = "SyncAdapter";
+    public static final String TAG = "NewsAsyncTaskLoader";
     private final ContentResolver mContentResolver;
     private static final int NET_CONNECT_TIMEOUT_MILLIS = 15000;  // 15 seconds
 
@@ -50,6 +50,8 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<List<News>>{
         String category = preferences.getString("news_category_list", null);
         StringBuilder stringBuilder = new StringBuilder(NewsNowConstants.NEWSORGURL);
         stringBuilder.append(NewsNowConstants.QUESTION_MARK);
+        Log.v(TAG,category);
+
         if (category!=null){
             switch (category) {
                 case NewsNowConstants.NEWS_CATEGORY_GENERAL:
