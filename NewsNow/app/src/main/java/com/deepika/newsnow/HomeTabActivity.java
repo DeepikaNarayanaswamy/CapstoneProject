@@ -1,5 +1,6 @@
 package com.deepika.newsnow;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -28,6 +29,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.deepika.newsnow.sync.GenericAccountService;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class HomeTabActivity extends AppCompatActivity {
@@ -40,6 +42,16 @@ public class HomeTabActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
+    public static final String AUTHORITY = "com.example.android.datasync.provider";
+    // Account
+    public static final String ACCOUNT = "default_account";
+    // Sync interval constants
+    public static final long SECONDS_PER_MINUTE = 60L;
+    public static final long SYNC_INTERVAL_IN_MINUTES = 60L;
+    public static final long SYNC_INTERVAL =
+            SYNC_INTERVAL_IN_MINUTES *
+                    SECONDS_PER_MINUTE;
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -80,7 +92,22 @@ public class HomeTabActivity extends AppCompatActivity {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-    }
+
+    // Global variables
+        // A content resolver for accessing the provider
+        ContentResolver mResolver;
+            // Get the content resolver for your app
+            mResolver = getContentResolver();
+        /*
+         * Turn on periodic syncing
+         */
+            ContentResolver.addPeriodicSync(
+                    GenericAccountService.GetAccount(ACCOUNT),
+                    AUTHORITY,
+                    Bundle.EMPTY,
+                    SYNC_INTERVAL);
+
+        }
 
 
     @Override
