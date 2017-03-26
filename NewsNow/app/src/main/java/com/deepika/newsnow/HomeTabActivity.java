@@ -93,19 +93,19 @@ public class HomeTabActivity extends AppCompatActivity {
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-    // Global variables
+   /* // Global variables
         // A content resolver for accessing the provider
         ContentResolver mResolver;
             // Get the content resolver for your app
             mResolver = getContentResolver();
-        /*
+        *//*
          * Turn on periodic syncing
-         */
+         *//*
             ContentResolver.addPeriodicSync(
                     GenericAccountService.GetAccount(ACCOUNT),
                     AUTHORITY,
                     Bundle.EMPTY,
-                    SYNC_INTERVAL);
+                    SYNC_INTERVAL);*/
 
         }
 

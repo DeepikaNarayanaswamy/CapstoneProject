@@ -146,7 +146,7 @@ public class NewsProvider extends ContentProvider {
 
     static class NewsDatabase extends SQLiteOpenHelper {
         /** Schema version. */
-        public static final int DATABASE_VERSION = 1;
+        public static final int DATABASE_VERSION = 3;
         /** Filename for SQLite file. */
         public static final String DATABASE_NAME = "news.db";
         private static final String TYPE_DATE = " DATE";
@@ -167,8 +167,8 @@ public class NewsProvider extends ContentProvider {
                         NewsContract.News.COLUMN_NAME_NEWS_TYPE + TYPE_TEXT + COMMA_SEP +
                         NewsContract.News.COLUMN_NAME_DATE_PUBLISHED + TYPE_DATE + COMMA_SEP +
                         NewsContract.News.COLUMN_NAME_IS_BOOKMARKED + TYPE_BOOLEAN + COMMA_SEP +
-                        NewsContract.News.COLUMN_NAME_IS_DELETED + TYPE_BOOLEAN + COMMA_SEP +
-                        ")";
+                        NewsContract.News.COLUMN_NAME_IS_DELETED + TYPE_BOOLEAN +
+                        ");";
 
         /** SQL statement to drop "entry" table. */
         private static final String SQL_DELETE_ENTRIES =

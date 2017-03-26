@@ -38,4 +38,11 @@ public class NewsNowConstants {
     // Question mark
     public static final String QUESTION_MARK = "?";
     public static final String AND = "&";
+
+    // RESPONSE VALUES
+    public static final String ARTICLES = "articles";
+    public static final String TITLE = "title";
+    public static final String DESCRIPTION = "description";
+    public static final String NEWSURL = "url";
+    public static final String NEWSIMAGEURL = "urlToImage";
 }

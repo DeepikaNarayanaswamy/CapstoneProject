@@ -1,9 +1,17 @@
 package com.deepika.newsnow;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +21,37 @@ import android.widget.TextView;
 
 import com.deepika.newsnow.adapter.CustomNewsArrayAdapter;
 import com.deepika.newsnow.pojo.News;
+import com.deepika.newsnow.provider.NewsContract;
+import com.deepika.newsnow.sync.NewsAsyncTaskLoader;
+
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HeadlinesFragment extends Fragment {
+public class HeadlinesFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<News>> {
 
+    private static final String[] PROJECTION = new String[]{
+            NewsContract.News._ID,
+            NewsContract.News.COLUMN_NAME_TITLE,
+            NewsContract.News.COLUMN_NAME_IMAGE_LINK,
 
+    };
+    private static final String[] FROM_COLUMNS = new String[]{
+            NewsContract.News.COLUMN_NAME_TITLE,
+            NewsContract.News.COLUMN_NAME_IMAGE_LINK
+    };
+
+    /**
+     * List of Views which will be populated by Cursor data.
+     */
+    private static final int[] TO_FIELDS = new int[]{
+            android.R.id.text1,
+            android.R.id.text2};
+    private CustomNewsArrayAdapter mAdapter;
+    private Object mSyncObserverHandle;
     public HeadlinesFragment() {
         // Required empty public constructor
     }
@@ -32,17 +62,12 @@ public class HeadlinesFragment extends Fragment {
                              Bundle savedInstanceState) {
         News n = new News();
         ArrayList<News>newsArrayList = new ArrayList<>();
-        n.setNewsTitle("News Title 1");
-        News n1 = new News();
-        n1.setNewsTitle("News Title 1");
-        newsArrayList.add(n);
-        newsArrayList.add(n1);
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
-        CustomNewsArrayAdapter adapter = new CustomNewsArrayAdapter(newsArrayList,this.getContext());
+        mAdapter = new CustomNewsArrayAdapter(newsArrayList,this.getContext());
 
 
-        ListView listView = (ListView)view.findViewById(R.id.headlinesList);
-        listView.setAdapter(adapter);
+        ListView listView = (ListView)view.findViewById(R.id.list);
+        listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -51,8 +76,24 @@ public class HeadlinesFragment extends Fragment {
                 startActivity(NewsDetailIntent);
             }
         });
+        getActivity().getSupportLoaderManager().initLoader(1, null, this).forceLoad();
         return view;
 
     }
+
+    @Override
+    public Loader<List<News>> onCreateLoader(int id, Bundle args) {
+        return new NewsAsyncTaskLoader(HeadlinesFragment.this.getActivity());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
+        mAdapter.setNews(data);
+    }
+    @Override
+    public void onLoaderReset(Loader<List<News>> loader) {
+        mAdapter.setNews(new ArrayList<News>());
+    }
+
 
 }

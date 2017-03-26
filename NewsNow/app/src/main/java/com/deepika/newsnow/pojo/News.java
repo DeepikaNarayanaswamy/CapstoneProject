@@ -72,7 +72,34 @@ public class News {
     private String newsCategory;
     private String newsURL;
     private boolean isBookmarked;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Date getDatePublished() {
+        return datePublished;
+    }
+
+    public void setDatePublished(Date datePublished) {
+        this.datePublished = datePublished;
+    }
+
     private boolean isDeleted;
     private Date datePublished;
+
+    public String getNewsID() {
+        return newsID;
+    }
+
+    public void setNewsID(String newsID) {
+        this.newsID = newsID;
+    }
+
+    private  String newsID;
 
 }

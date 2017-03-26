@@ -17,7 +17,7 @@ import com.deepika.newsnow.provider.NewsContract;
 
 public class SyncUtils {
 
-        private static final long SYNC_FREQUENCY = 60 * 60;  // 1 hour (in seconds)
+        private static final long SYNC_FREQUENCY = 1 * 1;  // 1 hour (in seconds)
         private static final String CONTENT_AUTHORITY = NewsContract.CONTENT_AUTHORITY;
         private static final String PREF_SETUP_COMPLETE = "setup_complete";
         // Value below must match the account type specified in res/xml/syncadapter.xml

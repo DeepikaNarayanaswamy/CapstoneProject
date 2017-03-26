@@ -76,6 +76,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 break;
         }
         stringBuilder.append(NewsNowConstants.AND+NewsNowConstants.NEWS_SORTBY_PARAMETER+"="+NewsNowConstants.NEWS_SORTBY_TOP);
+        stringBuilder.append(NewsNowConstants.AND+NewsNowConstants.NEWS_APIKEY_PARAMETER+"="+NewsNowConstants.NEWS_APIKEY_VALUE);
        try {
            URL url = new URL(stringBuilder.toString());
            InputStream stream = downloadUrl(url);

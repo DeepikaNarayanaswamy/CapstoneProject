@@ -24,7 +24,7 @@ public class NewsContract {
     /**
      * Path component for "entry"-type resources..
      */
-    private static final String PATH_ENTRIES = "news";
+    private static final String PATH_ENTRIES = "newsList";
 
     /**
      * Columns supported by "entries" records.

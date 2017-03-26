@@ -14,6 +14,7 @@ import com.deepika.newsnow.R;
 import com.deepika.newsnow.pojo.News;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by user on 3/25/2017.
@@ -62,5 +63,10 @@ public class CustomNewsArrayAdapter extends ArrayAdapter<News> {
         viewHolder.newsTitle.setText(news.getNewsTitle());
         return convertView;
 
+    }
+
+    public void setNews(List<News> dataList) {
+        data.addAll(dataList);
+        notifyDataSetChanged();
     }
 }

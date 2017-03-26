@@ -42,35 +42,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/news_now_widget_info" />
         </receiver>
-
-        <service
-            android:name=".sync.SyncService"
-            android:enabled="true"
-            android:exported="true" >
-
-            <intent-filter>
-                <action android:name="android.content.SyncAdapter" />
-            </intent-filter>
-            <!-- This points to a required XML file which describes our SyncAdapter. -->
-            <meta-data android:name="android.content.SyncAdapter"
-                android:resource="@xml/syncadapter" />
-            </service>
-        <service
-            android:name=".sync.GenericAccountService"
-            android:enabled="true"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator" />
-            </intent-filter>
-            <!-- This points to an XMLf ile which describes our account service. -->
-            <meta-data android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticator" />
-
-        </service>
-
-
-        <provider
+          <provider
             android:name=".provider.NewsProvider"
             android:authorities="com.deepika.newsnow"
             android:exported="false" />
