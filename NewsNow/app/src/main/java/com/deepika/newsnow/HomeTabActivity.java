@@ -1,6 +1,9 @@
 package com.deepika.newsnow;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -16,6 +19,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,7 +75,8 @@ public class HomeTabActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        Log.v("news category",pref.getString("news_category_list",null));
     }
 
 
@@ -91,7 +96,9 @@ public class HomeTabActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent modifySettings=new Intent(HomeTabActivity.this,SettingsActivity.class);
+
+            startActivity(modifySettings);
         }
 
         return super.onOptionsItemSelected(item);

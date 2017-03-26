@@ -60,8 +60,6 @@ public class CustomNewsArrayAdapter extends ArrayAdapter<News> {
         // TODO set image
 
         viewHolder.newsTitle.setText(news.getNewsTitle());
-        Log.v("view id = ",convertView.getId()+"");
-
         return convertView;
 
     }
