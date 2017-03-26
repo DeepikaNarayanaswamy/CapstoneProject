@@ -28,6 +28,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class HomeTabActivity extends AppCompatActivity {
 
     /**
@@ -45,7 +47,7 @@ public class HomeTabActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class HomeTabActivity extends AppCompatActivity {
         });
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         Log.v("news category",pref.getString("news_category_list",null));
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
 
