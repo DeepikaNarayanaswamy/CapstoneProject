@@ -66,6 +66,7 @@ public class CustomNewsArrayAdapter extends ArrayAdapter<News> {
     }
 
     public void setNews(List<News> dataList) {
+        data.clear();
         data.addAll(dataList);
         notifyDataSetChanged();
     }

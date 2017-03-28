@@ -30,21 +30,23 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<List<News>>{
     public static final String TAG = "NewsAsyncTaskLoader";
     private final ContentResolver mContentResolver;
     private static final int NET_CONNECT_TIMEOUT_MILLIS = 15000;  // 15 seconds
-
+    private String newsType;
     /**
      * Network read timeout, in milliseconds.
      */
     private static final int NET_READ_TIMEOUT_MILLIS = 10000;  // 10 seconds
 
-    public NewsAsyncTaskLoader(Context context){
+    public NewsAsyncTaskLoader(Context context, String newsTYPE){
         super(context);
         mContentResolver = context.getContentResolver();
+        newsType = newsTYPE;
     }
 
     @Override
     public List<News> loadInBackground() {
 
         Log.v("sync adapter", "sync adapter called");
+        Log.v(TAG,newsType);
         List<News> newsList = new ArrayList<>();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         String category = preferences.getString("news_category_list", null);
@@ -74,7 +76,8 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<List<News>>{
         }else{
             stringBuilder.append(NewsNowConstants.NEWS_SOURCE_PARAMETER + "=" + NewsNowConstants.THE_HINDU);
         }
-        stringBuilder.append(NewsNowConstants.AND + NewsNowConstants.NEWS_SORTBY_PARAMETER + "=" + NewsNowConstants.NEWS_SORTBY_TOP);
+
+        stringBuilder.append(NewsNowConstants.AND + NewsNowConstants.NEWS_SORTBY_PARAMETER + "=" + newsType);
         stringBuilder.append(NewsNowConstants.AND + NewsNowConstants.NEWS_APIKEY_PARAMETER + "=" + NewsNowConstants.NEWS_APIKEY_VALUE);
         try {
             URL url = new URL(stringBuilder.toString());
@@ -103,15 +106,21 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<List<News>>{
 
         return newsList;
     }
-    private InputStream downloadUrl(final URL url) throws IOException {
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(NET_READ_TIMEOUT_MILLIS /* milliseconds */);
-        conn.setConnectTimeout(NET_CONNECT_TIMEOUT_MILLIS /* milliseconds */);
-        conn.setRequestMethod("GET");
-        conn.setDoInput(true);
-        // Starts the query
-        conn.connect();
-        return conn.getInputStream();
+    private InputStream downloadUrl(final URL url)  {
+        HttpURLConnection conn;
+        try {
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(NET_READ_TIMEOUT_MILLIS /* milliseconds */);
+            conn.setConnectTimeout(NET_CONNECT_TIMEOUT_MILLIS /* milliseconds */);
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+            // Starts the query
+            conn.connect();
+            return conn.getInputStream();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     private void insertIntoTable(List<News>newsList) {
