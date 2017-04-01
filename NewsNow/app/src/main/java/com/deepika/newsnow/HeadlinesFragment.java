@@ -3,8 +3,10 @@ package com.deepika.newsnow;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -55,6 +57,9 @@ public class HeadlinesFragment extends Fragment implements LoaderManager.LoaderC
     private CustomNewsArrayAdapter mAdapter;
     private Object mSyncObserverHandle;
     private static int LOADER_ID = 1;
+    private SharedPreferences.OnSharedPreferenceChangeListener prefListener;
+    private LoaderManager.LoaderCallbacks<List<News>> callbacks;
+
     public HeadlinesFragment() {
         // Required empty public constructor
     }
@@ -67,6 +72,7 @@ public class HeadlinesFragment extends Fragment implements LoaderManager.LoaderC
         ArrayList<News>newsArrayList = new ArrayList<>();
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
         mAdapter = new CustomNewsArrayAdapter(newsArrayList,this.getContext());
+        callbacks =this;
         getActivity().getSupportLoaderManager().initLoader(LOADER_ID, null, this).forceLoad();
 
         ListView listView = (ListView)view.findViewById(R.id.list);
@@ -79,6 +85,18 @@ public class HeadlinesFragment extends Fragment implements LoaderManager.LoaderC
                 startActivity(NewsDetailIntent);
             }
         });
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                Log.v(TAG,"preference chagnes");
+                getLoaderManager().restartLoader(LOADER_ID, null, callbacks);
+
+            }
+        };
+        prefs.registerOnSharedPreferenceChangeListener(prefListener);
 
         return view;
 

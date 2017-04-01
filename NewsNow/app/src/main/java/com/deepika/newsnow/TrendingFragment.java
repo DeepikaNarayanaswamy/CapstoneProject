@@ -47,7 +47,7 @@ public class TrendingFragment extends Fragment implements LoaderManager.LoaderCa
         View view = inflater.inflate(R.layout.fragment_trending_tab, container, false);
         mAdapter = new CustomNewsArrayAdapter(newsArrayList,this.getContext());
         callbacks  = this;
-        getActivity().getSupportLoaderManager().initLoader(1, null, this).forceLoad();
+        getActivity().getSupportLoaderManager().initLoader(LOADER_ID, null, this).forceLoad();
 
         ListView listView = (ListView)view.findViewById(R.id.trendingNewsList);
         listView.setAdapter(mAdapter);

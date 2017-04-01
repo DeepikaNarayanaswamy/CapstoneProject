@@ -57,7 +57,7 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<List<News>>{
         if (category!=null){
             switch (category) {
                 case NewsNowConstants.NEWS_CATEGORY_GENERAL:
-                    stringBuilder.append(NewsNowConstants.NEWS_SOURCE_PARAMETER + " = " + NewsNowConstants.THE_HINDU);
+                    stringBuilder.append(NewsNowConstants.NEWS_SOURCE_PARAMETER + "=" + NewsNowConstants.THE_HINDU);
                     break;
                 case NewsNowConstants.NEWS_CATEGORY_SPORTS:
                     stringBuilder.append(NewsNowConstants.NEWS_SOURCE_PARAMETER + "=" + NewsNowConstants.ESPN);
