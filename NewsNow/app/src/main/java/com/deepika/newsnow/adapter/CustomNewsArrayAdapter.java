@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.deepika.newsnow.R;
 import com.deepika.newsnow.pojo.News;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +59,9 @@ public class CustomNewsArrayAdapter extends ArrayAdapter<News> {
             result = convertView;
         }
         viewHolder.newsTitle = (TextView) convertView.findViewById(R.id.newsTitle);
+        viewHolder.newsImage = (ImageView) convertView.findViewById(R.id.newsImage);
         // TODO set image
-
+        Picasso.with(context).load(news.getNewsImageURL()).into(viewHolder.newsImage);
         viewHolder.newsTitle.setText(news.getNewsTitle());
         return convertView;
 

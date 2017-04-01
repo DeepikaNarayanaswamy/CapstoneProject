@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.deepika.newsnow.provider.NewsContract;
 import com.deepika.newsnow.util.NewsNowConstants;
@@ -38,7 +39,7 @@ public class NewsDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveBookmark(newsId);
-
+                Toast.makeText(getApplicationContext(),"Bookmarked", Toast.LENGTH_SHORT).show();
             }
         });
         Intent intent = getIntent();
