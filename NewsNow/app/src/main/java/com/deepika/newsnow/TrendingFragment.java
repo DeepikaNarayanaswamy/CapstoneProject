@@ -57,6 +57,12 @@ public class TrendingFragment extends Fragment implements LoaderManager.LoaderCa
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent NewsDetailIntent = new Intent(view.getContext(),NewsDetail.class);
                 // Here we need to pass the news Id to get the full details
+                News n = mAdapter.getItem(i);
+                n.getNewsDescription();
+                NewsDetailIntent.putExtra(NewsNowConstants.DESCRIPTION,n.getNewsDescription());
+                NewsDetailIntent.putExtra(NewsNowConstants.TITLE,n.getNewsTitle());
+                NewsDetailIntent.putExtra(NewsNowConstants.NEWSIMAGEURL,n.getNewsImageURL());
+                NewsDetailIntent.putExtra(NewsNowConstants.NEWSURL,n.getNewsURL());
                 startActivity(NewsDetailIntent);
             }
         });
