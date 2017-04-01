@@ -15,6 +15,13 @@
     tools:showIn="@layout/activity_news_detail"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newsTITLE"
+        android:text="title"
+        android:textStyle="normal|bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,18 +33,14 @@
             android:id="@+id/newsImage"
             android:src="@drawable/ic_new_releases_white_18dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/newsTITLE"
-            android:text="title"/>
-
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newsDescription"
-        android:text="description"/>
+        android:text="description"
+        android:textStyle="normal|italic"
+        android:textColor="@color/colorPrimary" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

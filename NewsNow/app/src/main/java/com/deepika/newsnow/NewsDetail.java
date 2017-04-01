@@ -9,11 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.deepika.newsnow.util.NewsNowConstants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.squareup.picasso.Picasso;
 
 public class NewsDetail extends AppCompatActivity {
 
@@ -32,6 +35,18 @@ public class NewsDetail extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if (b!=null){
+            ImageView imageView  = (ImageView)findViewById(R.id.newsImage);
+            Picasso.with(this)
+                    .load(b.getString(NewsNowConstants.NEWSIMAGEURL))
+                    .into(imageView);
+            TextView titleTV = (TextView)findViewById(R.id.newsTITLE);
+            titleTV.setText(b.getString(NewsNowConstants.TITLE));
+            TextView descTV = (TextView)findViewById(R.id.newsDescription);
+            descTV.setText(b.getString(NewsNowConstants.DESCRIPTION));
+        }
 
         MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
 
