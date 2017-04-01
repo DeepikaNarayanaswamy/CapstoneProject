@@ -77,6 +77,7 @@ public class HeadlinesFragment extends Fragment implements LoaderManager.LoaderC
 
         ListView listView = (ListView)view.findViewById(R.id.list);
         listView.setAdapter(mAdapter);
+        listView.setEmptyView(view.findViewById(R.id.empty));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -88,6 +89,8 @@ public class HeadlinesFragment extends Fragment implements LoaderManager.LoaderC
                 NewsDetailIntent.putExtra(NewsNowConstants.TITLE,n.getNewsTitle());
                 NewsDetailIntent.putExtra(NewsNowConstants.NEWSIMAGEURL,n.getNewsImageURL());
                 NewsDetailIntent.putExtra(NewsNowConstants.NEWSURL,n.getNewsURL());
+                NewsDetailIntent.putExtra(NewsNowConstants.NEWS_ID,n.getNewsID());
+
                 startActivity(NewsDetailIntent);
             }
         });

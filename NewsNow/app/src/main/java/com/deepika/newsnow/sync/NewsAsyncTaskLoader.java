@@ -50,9 +50,12 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<List<News>>{
         List<News> newsList = new ArrayList<>();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         String category = preferences.getString("news_category_list", null);
-        StringBuilder stringBuilder = new StringBuilder(NewsNowConstants.NEWSORGURL);
+        StringBuilder stringBuilder;
+
+        stringBuilder = new StringBuilder(NewsNowConstants.NEWSORGURL_ARTICLES);
+
         stringBuilder.append(NewsNowConstants.QUESTION_MARK);
-        Log.v(TAG,category);
+
 
         if (category!=null){
             switch (category) {

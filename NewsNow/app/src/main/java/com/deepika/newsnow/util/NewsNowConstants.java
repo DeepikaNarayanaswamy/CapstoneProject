@@ -6,7 +6,8 @@ package com.deepika.newsnow.util;
 
 public class NewsNowConstants {
 
-    public static final String NEWSORGURL = "https://newsapi.org/v1/articles";
+    public static final String NEWSORGURL_ARTICLES = "https://newsapi.org/v1/articles";
+    public static final String NEWSORGURL_SOURCES = "https://newsapi.org/v1/sources";
     public static final String NEWS_SOURCE_PARAMETER = "source";
     public static final String NEWS_SORTBY_PARAMETER = "sortBy";
     public static final String NEWS_APIKEY_PARAMETER = "apiKey";
@@ -33,7 +34,7 @@ public class NewsNowConstants {
     // NEWS ORG SORTBY VALUES
 
     public static final String NEWS_SORTBY_TOP = "top";
-    public static final String NEWS_SORTBY_POPULAR = "popular";
+    public static final String NEWS_SORTBY_POPULAR = "latest";
 
     // Question mark
     public static final String QUESTION_MARK = "?";
@@ -45,4 +46,5 @@ public class NewsNowConstants {
     public static final String DESCRIPTION = "description";
     public static final String NEWSURL = "url";
     public static final String NEWSIMAGEURL = "urlToImage";
+    public static final String NEWS_ID = "id";
 }

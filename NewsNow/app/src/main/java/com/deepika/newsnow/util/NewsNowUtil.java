@@ -67,7 +67,7 @@ public class NewsNowUtil {
                 news.setNewsType(newsType);
                 news.setDeleted(false);
                 news.setNewsCategory(newsCategory);
-                news.setNewsID("NID_"+System.currentTimeMillis());
+                news.setNewsID("NID_"+i+System.currentTimeMillis()+"_"+sortBy);
                 newsList.add(news);
             }
 
