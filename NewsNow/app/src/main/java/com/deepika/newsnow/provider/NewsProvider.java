@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.CancellationSignal;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.deepika.newsnow.util.SelectionBuilder;
 
@@ -70,6 +71,7 @@ public class NewsProvider extends ContentProvider {
                 // Return all known entries.
                 builder.table(NewsContract.News.TABLE_NAME)
                         .where(selection, selectionArgs);
+                Log.v("PROVIER",builder.toString());
                 Cursor c = builder.query(db, projection, sortOrder);
                 // Note: Notification URI must be manually set here for loaders to correctly
                 // register ContentObservers.

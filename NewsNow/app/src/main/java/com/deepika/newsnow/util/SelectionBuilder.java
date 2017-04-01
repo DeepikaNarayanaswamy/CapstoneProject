@@ -139,7 +139,7 @@ public class SelectionBuilder {
             mSelection.append(" AND ");
         }
 
-        mSelection.append("(").append(selection).append(");");
+        mSelection.append("(").append(selection).append("? );");
         if (selectionArgs != null) {
             Collections.addAll(mSelectionArgs, selectionArgs);
         }
