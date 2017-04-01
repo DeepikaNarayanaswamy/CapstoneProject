@@ -126,7 +126,10 @@ public class NewsProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
+        final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        assert db != null;
+        int update = db.update(NewsContract.News.TABLE_NAME,contentValues,s,strings);
+        return update;
     }
 
     @Nullable

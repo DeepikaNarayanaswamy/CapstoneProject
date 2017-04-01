@@ -91,8 +91,7 @@ public class NewsDetail extends AppCompatActivity {
         ContentValues mUpdateValues = new ContentValues();
         Log.v(TAG,"To be bookmarked="+newsId);
         // Defines selection criteria for the rows you want to update
-        String mSelectionClause = NewsContract.News.COLUMN_NAME_ENTRY_ID +  " = ";
-        String[] mSelectionArgs = {newsId};
+        String mSelectionClause = NewsContract.News.COLUMN_NAME_ENTRY_ID +  " = ?";        String[] mSelectionArgs = {newsId};
 
         // Defines a variable to contain the number of updated rows
         int mRowsUpdated = 0;
