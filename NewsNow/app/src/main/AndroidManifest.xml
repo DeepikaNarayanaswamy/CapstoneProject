@@ -46,7 +46,9 @@
         <provider
             android:name=".provider.NewsProvider"
             android:authorities="com.deepika.newsnow"
-            android:exported="false" />
+            android:exported="true"
+            android:enabled="true"
+            android:grantUriPermissions="true"/>
 
         <service
             android:name=".widget.WidgetService"
