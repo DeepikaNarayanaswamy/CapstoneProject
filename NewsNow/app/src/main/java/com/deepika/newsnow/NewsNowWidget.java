@@ -6,9 +6,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.deepika.newsnow.widget.NewsRemoteViewsFactory;
 import com.deepika.newsnow.widget.WidgetService;
 
 /**
@@ -16,8 +18,8 @@ import com.deepika.newsnow.widget.WidgetService;
  */
 public class NewsNowWidget extends AppWidgetProvider {
     public static final String TOAST_ACTION = "com.example.android.stackwidget.TOAST_ACTION";
+    public static final String TAG = "NewsNowWidget";
     public static final String EXTRA_ITEM = "com.example.android.stackwidget.EXTRA_ITEM";
-
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
@@ -41,6 +43,7 @@ public class NewsNowWidget extends AppWidgetProvider {
          // Set the action for the intent.
          // When the user touches a particular view, it will have the effect of
          // broadcasting TOAST_ACTION.
+         toastIntent.setAction(TOAST_ACTION);
          toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
          intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
          PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent,
@@ -72,8 +75,11 @@ public class NewsNowWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        Log.v(TAG,"onReceive");
         AppWidgetManager mgr = AppWidgetManager.getInstance(context);
-        if (intent.getAction().equals(TOAST_ACTION)) {
+        if(NewsNowWidget.TOAST_ACTION.equals(intent.getAction())) {
+            Log.v(TAG, "toast");
             int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
 

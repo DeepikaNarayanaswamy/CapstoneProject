@@ -65,15 +65,16 @@ public class NewsRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     public RemoteViews getViewAt(int position) {
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.newslist);
         rv.setTextViewText(R.id.newsTitle, mWidgetItems.get(position).getNewsTitle());
-        Intent intent = new Intent(mContext,NewsDetail.class);
+        /*Intent intent = new Intent(mContext,NewsDetail.class);
 
-        Bundle extras = new Bundle();
+        */Bundle extras = new Bundle();
         extras.putString(NewsNowConstants.NEWSIMAGEURL,mWidgetItems.get(position).getNewsImageURL());
         extras.putString(NewsNowConstants.TITLE,mWidgetItems.get(position).getNewsTitle());
         extras.putString(NewsNowConstants.DESCRIPTION,mWidgetItems.get(position).getNewsDescription());
 
         extras.putInt(NewsNowWidget.EXTRA_ITEM, position);
         Intent fillInIntent = new Intent();
+        fillInIntent.setAction(NewsNowWidget.TOAST_ACTION);
         fillInIntent.putExtras(extras);
         // Make it possible to distinguish the individual on-click
         // action of a given item
