@@ -5,11 +5,13 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.deepika.newsnow.NewsDetail;
+import com.deepika.newsnow.NewsNowWidget;
 import com.deepika.newsnow.R;
 import com.deepika.newsnow.pojo.News;
 import com.deepika.newsnow.provider.NewsContract;
@@ -64,12 +66,19 @@ public class NewsRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.newslist);
         rv.setTextViewText(R.id.newsTitle, mWidgetItems.get(position).getNewsTitle());
         Intent intent = new Intent(mContext,NewsDetail.class);
-        intent.putExtra(NewsNowConstants.NEWSIMAGEURL,mWidgetItems.get(position).getNewsImageURL());
-        intent.putExtra(NewsNowConstants.TITLE,mWidgetItems.get(position).getNewsTitle());
-        intent.putExtra(NewsNowConstants.DESCRIPTION,mWidgetItems.get(position).getNewsDescription());
-        PendingIntent pendingIntent = PendingIntent.getActivity(mContext,0,intent,0);
 
-        rv.setOnClickPendingIntent(R.id.widgetList,pendingIntent);
+        Bundle extras = new Bundle();
+        extras.putString(NewsNowConstants.NEWSIMAGEURL,mWidgetItems.get(position).getNewsImageURL());
+        extras.putString(NewsNowConstants.TITLE,mWidgetItems.get(position).getNewsTitle());
+        extras.putString(NewsNowConstants.DESCRIPTION,mWidgetItems.get(position).getNewsDescription());
+
+        extras.putInt(NewsNowWidget.EXTRA_ITEM, position);
+        Intent fillInIntent = new Intent();
+        fillInIntent.putExtras(extras);
+        // Make it possible to distinguish the individual on-click
+        // action of a given item
+        rv.setOnClickFillInIntent(R.id.widgetList, fillInIntent);
+
         Log.v("newsremoteviewsfac","ondatasetchaged");
 
         return  rv;
@@ -90,8 +99,6 @@ public class NewsRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         Cursor cursor = mContext.getContentResolver().query(NewsContract.News.CONTENT_URI,projection,selection,selctionArgs,null);
         while (cursor.moveToNext()){
             News n = new News();
-
-            cursor.moveToNext();
             n.setNewsTitle(cursor.getString(cursor.getColumnIndex(NewsContract.News.COLUMN_NAME_TITLE)));
             n.setNewsID(cursor.getString(cursor.getColumnIndex(NewsContract.News.COLUMN_NAME_ENTRY_ID)));
             mWidgetItems.add(n);
