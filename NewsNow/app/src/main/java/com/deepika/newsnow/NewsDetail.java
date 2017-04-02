@@ -39,7 +39,7 @@ public class NewsDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveBookmark(newsId);
-                Toast.makeText(getApplicationContext(),"Bookmarked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.bookmark_done), Toast.LENGTH_SHORT).show();
             }
         });
         Intent intent = getIntent();

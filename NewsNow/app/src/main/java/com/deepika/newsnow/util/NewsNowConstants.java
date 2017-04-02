@@ -13,7 +13,7 @@ public class NewsNowConstants {
     public static final String NEWS_APIKEY_PARAMETER = "apiKey";
 
     // NEWS_API_KEY_VALUE
-    public static final String NEWS_APIKEY_VALUE  = "";
+    public static final String NEWS_APIKEY_VALUE  = "80af1e5411cb4be99792620b85a72287";
 
     // NEWS - SOURCES
     public static final String TECH_CRUNCH = "techcrunch";

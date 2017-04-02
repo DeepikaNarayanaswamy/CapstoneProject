@@ -9,9 +9,9 @@
         android:layout_height="20dp"
         android:src="@drawable/ic_bookmark_white_18dp"
         android:padding="10dp"
-        android:id="@+id/newsImage"/>
+        android:id="@+id/newsImage"
+        android:contentDescription="@string/news_image"/>
     <TextView
-        android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/newsTitle"

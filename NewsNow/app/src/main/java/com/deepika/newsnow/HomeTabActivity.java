@@ -81,14 +81,6 @@ public class HomeTabActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
