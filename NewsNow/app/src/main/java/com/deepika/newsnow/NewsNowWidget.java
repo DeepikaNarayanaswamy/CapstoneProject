@@ -28,6 +28,7 @@ public class NewsNowWidget extends AppWidgetProvider {
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,R.id.widgetList);
     }
 
     @Override

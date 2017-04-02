@@ -3,6 +3,7 @@ package com.deepika.newsnow.widget;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -63,22 +64,30 @@ public class NewsRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     public RemoteViews getViewAt(int position) {
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.newslist);
         rv.setTextViewText(R.id.newsTitle, mWidgetItems.get(position).getNewsTitle());
+        Log.v("newsremoteviewsfac","ondatasetchaged");
         return  rv;
 
     }
 
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public void onDataSetChanged() {
-
+        News n = new News();
+        n.setNewsTitle("abcd");
+        News n1 = new News();
+        n1.setNewsTitle("213255");
+        mWidgetItems.add(n);
+        mWidgetItems.add(n1);
+        Log.v("newsremoteviewsfac","ondatasetchaged");
     }
 
     @Override
     public int getCount() {
         return mCount;
     }
+
 }
