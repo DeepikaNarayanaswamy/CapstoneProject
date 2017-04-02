@@ -78,7 +78,7 @@ public class NewsRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         fillInIntent.putExtras(extras);
         // Make it possible to distinguish the individual on-click
         // action of a given item
-        rv.setOnClickFillInIntent(R.id.widgetList, fillInIntent);
+        rv.setOnClickFillInIntent(R.id.newsTitle, fillInIntent);
 
         Log.v("newsremoteviewsfac","ondatasetchaged");
 
@@ -98,6 +98,7 @@ public class NewsRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         String [] selctionArgs= {"1"};
         String [] projection = {NewsContract.News.COLUMN_NAME_TITLE,NewsContract.News.COLUMN_NAME_DESCRIPTION,NewsContract.News.COLUMN_NAME_IMAGE_LINK,NewsContract.News.COLUMN_NAME_ENTRY_ID};
         Cursor cursor = mContext.getContentResolver().query(NewsContract.News.CONTENT_URI,projection,selection,selctionArgs,null);
+        mWidgetItems.clear();
         while (cursor.moveToNext()){
             News n = new News();
             n.setNewsTitle(cursor.getString(cursor.getColumnIndex(NewsContract.News.COLUMN_NAME_TITLE)));

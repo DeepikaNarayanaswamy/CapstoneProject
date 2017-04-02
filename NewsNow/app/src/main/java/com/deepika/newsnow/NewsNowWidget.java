@@ -6,12 +6,15 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.deepika.newsnow.widget.NewsRemoteViewsFactory;
 import com.deepika.newsnow.widget.WidgetService;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * Implementation of App Widget functionality.
@@ -39,17 +42,15 @@ public class NewsNowWidget extends AppWidgetProvider {
 
 
          CharSequence widgetText = context.getString(R.string.appwidget_text);
-         Intent toastIntent = new Intent(context, NewsNowWidget.class);
-         // Set the action for the intent.
-         // When the user touches a particular view, it will have the effect of
-         // broadcasting TOAST_ACTION.
-         toastIntent.setAction(TOAST_ACTION);
-         toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-         PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent,
-                 PendingIntent.FLAG_UPDATE_CURRENT);
-         rv.setPendingIntentTemplate(R.id.widgetList, toastPendingIntent);
-
+        final Intent onItemClick = new Intent(context, NewsNowWidget.class);
+        onItemClick.setAction(TOAST_ACTION);
+        onItemClick.setData(Uri.parse(onItemClick
+                .toUri(Intent.URI_INTENT_SCHEME)));
+        final PendingIntent onClickPendingIntent = PendingIntent
+                .getBroadcast(context, 0, onItemClick,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+        rv.setPendingIntentTemplate(R.id.widgetList,
+                onClickPendingIntent);
 
          appWidgetManager.updateAppWidget(appWidgetId, rv);
          appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,R.id.widgetList);
@@ -82,12 +83,18 @@ public class NewsNowWidget extends AppWidgetProvider {
             Log.v(TAG, "toast");
             int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
-
+            Bundle extras = intent.getExtras();
+            Intent i = new Intent(context,NewsDetail.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtras(intent.getExtras());
+            context.startActivity(i);
             int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
-            Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
+
         }
         super.onReceive(context, intent);
 
     }
+
+
 }
 
