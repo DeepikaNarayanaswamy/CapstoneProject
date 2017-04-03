@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'capstoene config'
+            keyAlias 'capstoneconfig'
             keyPassword 'udacity'
-            storeFile file('D:/Android Nanodegree/Capstone Project/keystore.jks')
             storePassword 'udacity'
+            storeFile file('keystore.jks')
         }
     }
     compileSdkVersion 23
