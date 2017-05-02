@@ -1,7 +1,5 @@
-# CapstoneProject
-Android nanodegree capstone project
-The app provides news information on  General, Sports, Technology and Wildlife categories.
-The news information are fetched from [NewsAPI](https://newsapi.org)
+# NewsNow
+The app is developed as part of Android nanodegree capstone project. The news information on  General, Sports, Technology and Wildlife categories. The news information are fetched from [NewsAPI](https://newsapi.org)
 
 ### Features
 
